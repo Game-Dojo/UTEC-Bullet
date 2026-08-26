@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://cty651t3s1gi"]
+
+[ext_resource type="Script" uid="uid://cbt2midho3dpa" path="res://Scripts/game.gd" id="1_i6g32"]
+[ext_resource type="Texture2D" uid="uid://celb26x8wmvgk" path="res://Assets/sBg.png" id="1_qxrlw"]
+[ext_resource type="Texture2D" uid="uid://djdnk80ckck1l" path="res://Assets/sMap.png" id="2_wrm1d"]
+[ext_resource type="Texture2D" uid="uid://dfnye57erriyv" path="res://Assets/sWall.png" id="3_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://b7i3og3pe4528" path="res://Objects/player.tscn" id="4_wowpa"]
+[ext_resource type="Texture2D" uid="uid://dd3mpyg8cjy0e" path="res://Assets/crosshair-122.png" id="7_1l0tm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5h6n"]
+size = Vector2(321, 17.383514)
+
+[node name="Game" type="Node2D" unique_id=450207021]
+script = ExtResource("1_i6g32")
+
+[node name="Background" type="Node2D" parent="." unique_id=701355976]
+
+[node name="TilableBackground" type="Parallax2D" parent="Background" unique_id=142188272]
+scroll_offset = Vector2(-279, -123)
+repeat_size = Vector2(64, 64)
+repeat_times = 10
+
+[node name="SBg" type="Sprite2D" parent="Background/TilableBackground" unique_id=781470804]
+texture_repeat = 2
+position = Vector2(326, 169)
+texture = ExtResource("1_qxrlw")
+
+[node name="FrontMap" type="Sprite2D" parent="Background" unique_id=579761158]
+position = Vector2(320, 180)
+texture = ExtResource("2_wrm1d")
+
+[node name="Walls" type="Sprite2D" parent="Background/FrontMap" unique_id=216483344]
+texture = ExtResource("3_wrm1d")
+
+[node name="Level" type="Node2D" parent="." unique_id=1698042378]
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1502541664]
+
+[node name="Player" parent="." unique_id=484376506 instance=ExtResource("4_wowpa")]
+position = Vector2(320, 180)
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=53432898]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls" unique_id=2040766617]
+position = Vector2(320.5, 27.5)
+shape = SubResource("RectangleShape2D_n5h6n")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls" unique_id=1290820853]
+position = Vector2(322, 332)
+shape = SubResource("RectangleShape2D_n5h6n")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls" unique_id=1355716126]
+position = Vector2(168.99998, 180)
+rotation = 1.5685987
+shape = SubResource("RectangleShape2D_n5h6n")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls" unique_id=1363667248]
+position = Vector2(472.19174, 178.99956)
+rotation = 1.5685987
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_n5h6n")
+
+[node name="Crosshair" type="Sprite2D" parent="." unique_id=1665093204]
+z_index = 1
+z_as_relative = false
+position = Vector2(250, 151)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_1l0tm")
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=1271707951]
+
+[node name="SpawnPoint" type="Node2D" parent="SpawnPoints" unique_id=1228928831]
+position = Vector2(202, 297)
+
+[node name="SpawnPoint2" type="Node2D" parent="SpawnPoints" unique_id=1347137191]
+position = Vector2(437, 296)
+
+[node name="SpawnPoint3" type="Node2D" parent="SpawnPoints" unique_id=1077430541]
+position = Vector2(441, 56)
+
+[node name="SpawnPoint4" type="Node2D" parent="SpawnPoints" unique_id=1336603207]
+position = Vector2(201, 58)
+
+[node name="SpawnPoint5" type="Node2D" parent="SpawnPoints" unique_id=1388156992]
+position = Vector2(199, 182)
+
+[node name="SpawnPoint6" type="Node2D" parent="SpawnPoints" unique_id=1485029195]
+position = Vector2(321, 301)
+
+[node name="SpawnPoint7" type="Node2D" parent="SpawnPoints" unique_id=724993628]
+position = Vector2(436, 174)
+
+[node name="SpawnPoint8" type="Node2D" parent="SpawnPoints" unique_id=1462194993]
+position = Vector2(319, 56)
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1017185033]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

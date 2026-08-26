@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://b7i3og3pe4528"]
+
+[ext_resource type="Script" uid="uid://veoau7h1g0n0" path="res://Scripts/player.gd" id="1_0ad8t"]
+[ext_resource type="Texture2D" uid="uid://drvq6dhhjwcpm" path="res://Assets/sPlayerIdle_strip4.png" id="2_x20fu"]
+[ext_resource type="Texture2D" uid="uid://m4n18bw6b55c" path="res://Assets/sPlayerRun_strip7.png" id="3_0ar0x"]
+[ext_resource type="Texture2D" uid="uid://c1jljfet15ovc" path="res://Assets/sGun.png" id="4_slvmq"]
+[ext_resource type="AudioStream" uid="uid://caddf6360h0cx" path="res://Assets/aBullet.wav" id="5_x20fu"]
+[ext_resource type="AudioStream" uid="uid://csu2mfb0jmxwr" path="res://Assets/aDeath.wav" id="6_0ar0x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l0tm"]
+atlas = ExtResource("2_x20fu")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v158k"]
+atlas = ExtResource("2_x20fu")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4fw4"]
+atlas = ExtResource("2_x20fu")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldgsr"]
+atlas = ExtResource("2_x20fu")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5yvi"]
+atlas = ExtResource("3_0ar0x")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rku1e"]
+atlas = ExtResource("3_0ar0x")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfjv2"]
+atlas = ExtResource("3_0ar0x")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1phco"]
+atlas = ExtResource("3_0ar0x")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb51f"]
+atlas = ExtResource("3_0ar0x")
+region = Rect2(160, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnt18"]
+atlas = ExtResource("3_0ar0x")
+region = Rect2(200, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewbju"]
+atlas = ExtResource("3_0ar0x")
+region = Rect2(240, 0, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n5h6n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1l0tm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v158k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4fw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldgsr")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5yvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rku1e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfjv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1phco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb51f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnt18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewbju")
+}],
+"loop": 1,
+"name": &"Run",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n5h6n"]
+
+[node name="Player" type="CharacterBody2D" unique_id=1190767633]
+motion_mode = 1
+script = ExtResource("1_0ad8t")
+
+[node name="Gun" type="Node2D" parent="." unique_id=1423158947]
+
+[node name="SGun" type="Sprite2D" parent="Gun" unique_id=570307591]
+texture = ExtResource("4_slvmq")
+offset = Vector2(12, 0)
+
+[node name="BulletSpawner" type="Node2D" parent="Gun" unique_id=1867901809]
+position = Vector2(29, 0)
+
+[node name="Visual" type="AnimatedSprite2D" parent="." unique_id=2036393275]
+sprite_frames = SubResource("SpriteFrames_n5h6n")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="BodyShape" type="CollisionShape2D" parent="." unique_id=649444178]
+shape = SubResource("CircleShape2D_n5h6n")
+
+[node name="ShootAudio" type="AudioStreamPlayer" parent="." unique_id=225327730]
+stream = ExtResource("5_x20fu")
+
+[node name="DeathAudio" type="AudioStreamPlayer" parent="." unique_id=1724209803]
+stream = ExtResource("6_0ar0x")
