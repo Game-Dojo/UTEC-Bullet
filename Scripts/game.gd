@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 	crosshair.global_position = get_global_mouse_position()
 
 func _on_spawn_timer_timeout() -> void:
-	spawn_timer.wait_time = randf_range(2,6)
+	spawn_timer.wait_time = randf_range(2,4)
 	
 	var enemy = ENEMY.instantiate()
 	var random_point = spawn_points.get_children().pick_random()

@@ -99,6 +99,9 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n5h6n"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y5fic"]
+radius = 13.038404
+
 [node name="Player" type="CharacterBody2D" unique_id=1190767633]
 motion_mode = 1
 script = ExtResource("1_0ad8t")
@@ -125,3 +128,10 @@ stream = ExtResource("5_x20fu")
 
 [node name="DeathAudio" type="AudioStreamPlayer" parent="." unique_id=1724209803]
 stream = ExtResource("6_0ar0x")
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=893313491]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=40308848]
+shape = SubResource("CircleShape2D_y5fic")
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
