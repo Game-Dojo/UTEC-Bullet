@@ -39,9 +39,12 @@ func _physics_process(_delta):
 
 func _shoot():
 	_recoil()
-	var bullet = BULLET.instantiate()
-	bullet.transform = bullet_spawner.global_transform
-	get_parent().add_child(bullet)
+	var pattern = [-8, 0, 8]
+	for b in 3:
+		var bullet = BULLET.instantiate()
+		bullet.transform = bullet_spawner.global_transform
+		bullet.rotation_degrees += pattern[b - 1]
+		get_parent().add_child(bullet)
 
 func _recoil():
 	var dir = (global_position - mouse_position).normalized()
